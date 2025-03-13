@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наташа, я люблю тебя</title>
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s infinite;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 50px;
+            font-family: 'Pacifico', cursive;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        button {
+            background-color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            color: #333;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Анимация сердца */
+        .heart {
+            font-size: 5rem;
+            color: red;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Анимация появления текста */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Анимация переливающегося фона */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Стили для частиц */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-50px) translateX(50px);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер с основным контентом -->
+    <div class="container">
+        <h1 class="fade-in">Наташа, я люблю тебя ❤️</h1>
+        <p class="fade-in">Этот сайт создан специально для тебя. Каждая строчка здесь — это моё сердце, обращённое к тебе. Ты — самое важное, что есть в моей жизни.</p>
+        
+        <button id="showFeelings">Узнать больше о моих чувствах</button>
+
+        <div id="feelings" class="hidden fade-in">
+            <p>Ты — мой свет, моя радость, мой смысл. Спасибо за то, что ты есть. Я хочу быть рядом с тобой каждый день, делить радость и печаль, поддерживать и заботиться о тебе.</p>
+            <p>Помнишь тот день, когда мы встретились? Твоя улыбка осветила весь мир вокруг. С тех пор каждая минута рядом с тобой — это подарок судьбы.</p>
+            <p>Ты — как песня, которая звучит в моём сердце. Как звезда, которая ведёт меня через тьму. Как цветок, который наполняет мою жизнь красотой.</p>
+            <div class="heart">❤️</div>
+        </div>
+
+        <footer>
+            &copy; 2025 | Создано Шаровы Никитой с любовью для Наташи
+        </footer>
+    </div>
+
+    <!-- Конфетти-эффект -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Показать скрытый текст при нажатии на кнопку
+        const button = document.getElementById('showFeelings');
+        const feelings = document.getElementById('feelings');
+
+        button.addEventListener('click', () => {
+            feelings.classList.toggle('hidden');
+            launchConfetti();
+        });
+
+        // Запуск конфетти
+        function launchConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Анимация частиц (звёзды)
+        const particlesContainer = document.createElement('div');
+        particlesContainer.classList.add('particles');
+        document.body.appendChild(particlesContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            particle.style.opacity = Math.random();
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
